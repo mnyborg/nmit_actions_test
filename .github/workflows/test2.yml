@@ -1,0 +1,43 @@
+name: Hello and Goodbye Workflow with javascript
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  hello:
+    runs-on: ubuntu-latest  # Use the latest Ubuntu virtual machine
+    steps:
+      # Download the repository content to the runner
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      # Set up a specific Node.js version
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 20
+
+      # Run the hello.js script from the repository
+      - name: Run Hello script
+        run: node hello.js
+  goodbye:
+    # This job will only start after the "hello" job has finished successfully
+    needs: hello
+    runs-on: ubuntu-latest
+    steps:
+      # Download the repository content again
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      # Set up Node.js 
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 20
+
+      # Run the goodbye.js script from the repository
+      - name: Run Goodbye script
+        run: node goodbye.js
