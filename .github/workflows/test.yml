@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest # spin up a virtual ubuntu server on GitHub
     steps:
       - name: Say Hello
-        run: echo "Hello world"
+        run: echo "Hello world 2"
 
   goodbye:
     runs-on: ubuntu-latest
